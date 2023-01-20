@@ -8,7 +8,7 @@ typedef struct treeNode {
 }treeNode;
 
 treeNode* insertKey(treeNode* p, char x){
-    /*트리의 루트부터 적절한 위치를 찾아가는 재귀호출실행*/
+    /*트리의 루트부터 적절한 위치를 찾아가는 재귀 호출 실행*/
     treeNode* newNode;
     if(p == NULL){ //리프 노드 삽입 연산 
         newNode = (treeNode*)malloc(sizeof(treeNode));
@@ -27,23 +27,24 @@ treeNode* insertKey(treeNode* p, char x){
         return p;
     }
 }
+
 void insert(treeNode** root, char x){
         *root = insertKey(*root,x);
     }
 
-    treeNode* searchBST(treeNode* root, char x){
-        treeNode* p;
-        p = root;
-        while(p != NULL){
-            if(x< p->key)
-                p = p -> left;
-            else if( x == p->key)
-                return p;
-            else p = p->right;
-        }
-        printf("\nThere are no such thing\n");
-        return p;
+treeNode* searchBST(treeNode* root, char x){ // 이진트리에서 탐색하는 알고리
+    treeNode* p;
+    p = root;
+    while(p != NULL){
+        if(x< p->key)
+            p = p -> left;
+        else if( x == p->key)
+            return p;
+        else p = p->right;
     }
+    printf("\nThere are no such thing\n");
+    return p;
+}
 
 
 int main(){
