@@ -134,7 +134,7 @@ void DFS_adjList(graphType *g, int v)
     }
 }
 
-void main(){
+int main(){
     int i;
     graphType *G9;
     G9 = (graphType*)malloc(sizeof(graphType));
