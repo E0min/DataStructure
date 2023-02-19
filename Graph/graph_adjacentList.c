@@ -11,11 +11,11 @@ typedef struct graphNode // 각 정점들의 포인터 변수가 가리키는 �
 
 typedef struct graphType
 {
-    int n;                            // 그래프의 정점 갯수
-    graphNode *adjList_H[MAX_VERTEX]; // 다음 정점(노드)와 연결하는 포인터배열(배열의 각 요소에 포인터 자료형을 할당함)
+    int n;                            // 정점의 갯수
+    graphNode *adjList_H[MAX_VERTEX]; // 각 정점들은 다음 정점을 가리키는 포인터 변수를 가지므로 포인터 변수를 저장하는 배열 선언
 } graphType;
 
-void creategraph(graphType *g) //graphType 포인터 변수를 초기화하는 역할
+void creategraph(graphType *g)
 {
     int v;
     g->n = 0;
@@ -23,7 +23,7 @@ void creategraph(graphType *g) //graphType 포인터 변수를 초기화하는 �
         g->adjList_H[v] = NULL;
 }
 
-void insertVertex(graphType *g, int v)
+void insertVertex(graphType *g, int v) // 정점 추가 
 {
     if (((g->n) + 1) > MAX_VERTEX)
     {
@@ -35,16 +35,16 @@ void insertVertex(graphType *g, int v)
 
 void insertEdge(graphType *g, int u, int v)
 {
-    graphNode *node; // 
-    if (u >= g->n || v >= g->n) // 정점에 없는거 고르는 경우
+    graphNode *node;
+    if (u >= g->n || v >= g->n)
     {
         printf("\n그래프에 없는 정점입니다.");
         return;
     }
-    node = (graphNode *)malloc(sizeof(graphNode)); // graphNode 포인터변수 생성후 동적 할당
-    node->vertex = v; 
-    node->link = g->adjList_H[u]; //인자값의 graphNode 포인터 배열의 원소를 할당
-    g->adjList_H[u] = node; //adjList는 graphNode의 포인터를 저장하는 배열이므로..
+    node = (graphNode *)malloc(sizeof(graphNode));
+    node->vertex = v;      
+    node->link = g->adjList_H[u];
+    g->adjList_H[u] = node;
 }
 
 void print_adjList(graphType *g)
@@ -63,7 +63,7 @@ void print_adjList(graphType *g)
     }
 }
 
-int main()
+void main()
 {
     int i;
     graphType *G1, *G2, *G3, *G4;
@@ -76,9 +76,9 @@ int main()
     creategraph(G3);
     creategraph(G4);
     for (i = 0; i < 4; i++)
-        insertVertex(G1,i);
-    insertEdge(G1, 0, 3); //A ->D->(NULL)을 가리킴
-    insertEdge(G1, 0, 1); //A ->B->D->(NULL)을 가리킴
+        insertVertex(G1, i);
+    insertEdge(G1, 0, 3);
+    insertEdge(G1, 0, 1);
     insertEdge(G1, 1, 3);
     insertEdge(G1, 1, 2);
     insertEdge(G1, 1, 0);
@@ -87,11 +87,11 @@ int main()
     insertEdge(G1, 3, 2);
     insertEdge(G1, 3, 1);
     insertEdge(G1, 3, 0);
-    printf("\nG1의 인접 리스트");
+    printf("\n G1의 인접 리스트");
     print_adjList(G1);
 
     for (i = 0; i < 3; i++)
-        insertVertex(G2,i);
+        insertVertex(G2, i);
     insertEdge(G2, 0, 2);
     insertEdge(G2, 0, 1);
     insertEdge(G2, 1, 2);
@@ -102,7 +102,7 @@ int main()
     print_adjList(G2);
 
     for (i = 0; i < 4; i++)
-        insertVertex(G3,i);
+        insertVertex(G3, i);
     insertEdge(G3, 0, 3);
     insertEdge(G3, 0, 1);
     insertEdge(G3, 1, 3);
@@ -112,7 +112,7 @@ int main()
     print_adjList(G3);
 
     for (i = 0; i < 3; i++)
-        insertVertex(G4,i);
+        insertVertex(G4, i);
     insertEdge(G4, 0, 2);
     insertEdge(G4, 0, 1);
     insertEdge(G4, 1, 2);
